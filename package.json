@@ -1,0 +1,29 @@
+{
+  "name": "challenge-14",
+  "version": "1.0.0",
+  "description": "API for a social network web application where users can share their thoughts",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Morkendi/Social-Network-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Morkendi/Social-Network-API/issues"
+  },
+  "homepage": "https://github.com/Morkendi/Social-Network-API#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "mongoose": "^7.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}

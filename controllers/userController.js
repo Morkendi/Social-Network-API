@@ -73,7 +73,7 @@ const userControllers = {
     },
 // Friends
     // UPDATE with ID
-    async addFriend(req, res) {
+    async updateFriend(req, res) {
         try{
             const addFriend = await Users.findOneAndUpdate({_id: params.id}, {$push: { friends: params.friendId}}, {new: true})
             .populate({path: 'friends', select: ('-__v')})

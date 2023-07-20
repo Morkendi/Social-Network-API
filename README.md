@@ -9,6 +9,7 @@
 
 <div align="center"> 
  <img src="https://img.shields.io/badge/-moment-red"><img>
+  <img src="https://img.shields.io/badge/-dotenv-orange"><img>
  <img src="https://img.shields.io/badge/-Express-blue"><img>
  <img src="https://img.shields.io/badge/-Mongoose-brightgreen"><img>
  </div>

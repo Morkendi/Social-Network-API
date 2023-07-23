@@ -43,14 +43,14 @@ This project creates an API for a social network based on sharing thoughts. The 
 ## Mock Up
 The following images demonstrate the functionality of the application.
 <div align="center">
-    <img src="./assets/GET%20all.png" alt="GET all users"></img>
         <h2>GET all</h2>
-    <img src="./assets/GET%20single.png" alt="GET single user"></img>
+    <img src="./assets/GET%20all.png" alt="GET all users"></img>
         <h2>GET single</h2>
-    <img src="./assets/POST%20new.png" alt="POST new user"></img>
+    <img src="./assets/GET%20single.png" alt="GET single user"></img>
         <h2>CREATE new user</h2>
-    <img src="./assets/DELETE%20user.png" alt="PUT user with ID"></img>
+    <img src="./assets/POST%20new.png" alt="POST new user"></img>
         <h2>DELETE user</h2>
+    <img src="./assets/DELETE%20user.png" alt="PUT user with ID"></img>
 </div>
 
 ## Credits
@@ -62,4 +62,4 @@ This project utilizes an MIT License. [Read more](https://choosealicense.com/lic
 
 ## Links
 - Link to [GitHub repo](https://github.com/Morkendi/Social-Network-API)
-- Link to [Video Demo]()
+- Link to [Video Demo](https://drive.google.com/file/d/1Joy_8rvpF6najoPZSOf01u4V4lhGwiJf/view?usp=sharing)

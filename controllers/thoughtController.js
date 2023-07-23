@@ -1,5 +1,6 @@
 // Require Models
 const { Thoughts, Users } = require('../models');
+const { updateUser } = require('./userController')
 
 // Setup Controller
 const thoughtControllers = {
@@ -13,6 +14,7 @@ const thoughtControllers = {
             res.json(allThoughts);
         }catch(err){
             res.status(500).json(err);
+            console.log(err);
         }
     },
     // GET by ID
@@ -27,33 +29,33 @@ const thoughtControllers = {
             res.json(singleThought);
         }catch(err){
             res.status(500).json(err);
+            console.log(err);
         }
     },
     // POST new
     async createThought(req, res) {
         try{
-            const {_id} = await Thoughts.create(req.body);
-            const newThought = await Users.findOneAndUpdate(
-                {_id: params.userId},
-                {$push: {thoughts: _id}},
+            const createThought = await Thoughts.create(req.body);
+            const updateUser = await Users.findOneAndUpdate(
+                {_id: req.body.userId},
+                {$push: {thoughts: createThought._id}},
                 {new: true}
-            );
+            )
 
-            if (!newThought) {
-                res.status(404).json({message: 'No thoughts found with this ID!'});
-                return;
+            if (!updateUser){
+                return res.status(404).json({message: 'No user found with this ID!'})
             }
 
-            res.json(newThought);
-        }catch(err){
-            res.status(500).json(err);
+            res.json(updateUser)
+        } catch(err){
+            res.status(500).json(err)
         }
     },
     // UPDATE with ID
     async updateThought(req, res) {
         try{
             const updateThought = await Thoughts.findOneAndUpdate(
-                {_id: req.params.id},
+                {_id: req.params.thoughtId},
                 {$set: req.body},
                 {new: true, runValidators: true});
 
@@ -65,12 +67,14 @@ const thoughtControllers = {
             res.json(updateThought);
         }catch(err){
             res.status(500).json(err);
+            console.log(err);
         }
     },
     // DELETE with ID
     async deleteThought(req, res) {
         try{
-            const deleteThought = await Thoughts.findOneAndDelete({_id: req.params.thoughtId});
+            const deleteThought = await Thoughts.findOneAndDelete(
+                {_id: req.params.thoughtId});
 
             if(!deleteThought) {
                 res.status(404).json({message: 'No thought found with this ID'});
@@ -80,6 +84,7 @@ const thoughtControllers = {
             res.json(deleteThought);
         }catch(err){
             res.status(500).json(err);
+            console.log(err);
         }
     },
 // Reactions
@@ -99,14 +104,15 @@ const thoughtControllers = {
             res.json(updateReaction);
         }catch(err){
             res.status(500).json(err);
+            console.log(err);
         }
     },
     // DELETE with ID
     async deleteReaction(req, res) {        
         try{
             const deleteReaction = await Thoughts.findOneAndUpdate(
-                {_id: params.thoughtId}, 
-                {$pull: {reactions: {reactionId: params.reactionId}}}, 
+                {_id: req.params.thoughtId}, 
+                {$pull: {reactions: {reactionId: req.params.reactionId}}}, 
                 {new : true});
 
             if(!deleteReaction) {
@@ -117,6 +123,7 @@ const thoughtControllers = {
             res.json(deleteReaction);
         }catch(err){
             res.status(500).json(err);
+            console.log(err);
         }}
 };
 

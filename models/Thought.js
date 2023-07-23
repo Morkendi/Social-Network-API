@@ -5,7 +5,7 @@ const moment = require('moment');
 const reactionSchema = new Schema(
     {
     // Set a custom ID
-    reactionID: {
+    reactionId: {
         type: Schema.Types.ObjectId,
         default: () => new Types.ObjectId()
     },
@@ -26,8 +26,11 @@ const reactionSchema = new Schema(
     }},
     {
     toJSON: {
-        getters: true
-    }});
+        getters: true,
+        virtuals: true
+    },
+    id: false
+});
 
 const thoughtSchema = new Schema (
     {
@@ -41,7 +44,7 @@ const thoughtSchema = new Schema (
         type: Date,
         default: Date.now,
         // Use Moment.js
-        get: (createdDate) => moment(createdDate).format('DD/MM/YYYY[at] HH:mm:ss')
+        get: (createdDate) => moment(createdDate).format('DD/MM/YYYY [at] HH:mm:ss')
     },
     username: {
         type: String,

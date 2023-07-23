@@ -59,7 +59,7 @@ const userControllers = {
     async updateUser(req, res) {
         try{
             const updateUser = await Users.findOneAndUpdate(
-                { _id: params.id },
+                { _id: req.params.userId },
                 {$set: req.body}, 
                 { new: true, runValidators: true });
 
@@ -77,7 +77,7 @@ const userControllers = {
     // DELETE with ID
     async deleteUser(req, res) {
         try{
-            const deleteUser = await Users.findOneAndDelete({_id: params.userId});
+            const deleteUser = await Users.findOneAndDelete({_id: req.params.userId});
 
             if(!deleteUser) {
                 res.status(404).json({message: 'No user found with this ID'});
@@ -114,8 +114,8 @@ const userControllers = {
     async deleteFriend(req, res) {
         try{
             const deleteFriend = await Users.findOneAndUpdate(
-                { _id: params.userId },
-                { $pull: { friends: params.friendId } },
+                { _id: req.params.userId },
+                { $pull: { friends: req.params.friendId } },
                 { new: true });
 
                 if(!deleteFriend) {

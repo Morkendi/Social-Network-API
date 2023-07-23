@@ -14,7 +14,6 @@ const thoughtControllers = {
             res.json(allThoughts);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // GET by ID
@@ -29,7 +28,6 @@ const thoughtControllers = {
             res.json(singleThought);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // POST new
@@ -67,7 +65,6 @@ const thoughtControllers = {
             res.json(updateThought);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // DELETE with ID
@@ -84,7 +81,6 @@ const thoughtControllers = {
             res.json(deleteThought);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
 // Reactions
@@ -104,7 +100,6 @@ const thoughtControllers = {
             res.json(updateReaction);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // DELETE with ID
@@ -123,7 +118,6 @@ const thoughtControllers = {
             res.json(deleteReaction);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }}
 };
 

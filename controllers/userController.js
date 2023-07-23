@@ -16,7 +16,6 @@ const userControllers = {
             res.json(allUsers);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // GET by ID
@@ -41,7 +40,6 @@ const userControllers = {
         res.json(singleUser);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // POST new
@@ -52,7 +50,6 @@ const userControllers = {
             res.json(newUser);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // UPDATE with ID
@@ -71,7 +68,6 @@ const userControllers = {
             res.json(updateUser);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // DELETE with ID
@@ -87,7 +83,6 @@ const userControllers = {
             res.json(deleteUser);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
 // Friends
@@ -107,7 +102,6 @@ const userControllers = {
             res.json(addFriend);
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
     // DELETE with ID
@@ -126,7 +120,6 @@ const userControllers = {
                 res.json(deleteFriend)
         }catch(err){
             res.status(500).json(err);
-            console.log(err);
         }
     },
 };

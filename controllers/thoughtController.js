@@ -9,12 +9,7 @@ const thoughtControllers = {
     async getAllThoughts(req,res) {
         try{
             const allThoughts = await Thoughts.find({})
-            .populate({
-                path: 'reactions',
-                select: '-__v'
-            })
             .select('-__v')
-            .sort({_id: -1})
             res.json(allThoughts);
         }catch(err){
             res.status(500).json(err);
@@ -23,12 +18,12 @@ const thoughtControllers = {
     // GET by ID
     async getSingleThought(req,res) {
         try{
-            const singleThought = await Thoughts.findOne({_id: req.params.id})
-            .populate({
-                path: 'reactions',
-                select: '-__v'
-            })
-            .select('-__v')
+            const singleThought = await Thoughts.findOne({_id: req.params.thoughtId})
+            .select('-__v');
+            if (!singleThought) {
+                res.status(404).json({message: 'No thoughts found with this ID!'});
+                return;
+            }
             res.json(singleThought);
         }catch(err){
             res.status(500).json(err);
@@ -43,10 +38,12 @@ const thoughtControllers = {
                 {$push: {thoughts: _id}},
                 {new: true}
             );
+
             if (!newThought) {
                 res.status(404).json({message: 'No thoughts found with this ID!'});
                 return;
             }
+
             res.json(newThought);
         }catch(err){
             res.status(500).json(err);
@@ -55,11 +52,16 @@ const thoughtControllers = {
     // UPDATE with ID
     async updateThought(req, res) {
         try{
-            const updateThought = await Thoughts.findOneAndUpdate({_id: req.params.id},req.body,{new: true, runValidators: true});
+            const updateThought = await Thoughts.findOneAndUpdate(
+                {_id: req.params.id},
+                {$set: req.body},
+                {new: true, runValidators: true});
+
             if(!updateThought) {
                 res.status(404).json({message: 'No thought found with this ID'});
                 return;
             }
+
             res.json(updateThought);
         }catch(err){
             res.status(500).json(err);
@@ -68,11 +70,13 @@ const thoughtControllers = {
     // DELETE with ID
     async deleteThought(req, res) {
         try{
-            const deleteThought = await Thoughts.findOneAndDelete({_id: req.params.id});
+            const deleteThought = await Thoughts.findOneAndDelete({_id: req.params.thoughtId});
+
             if(!deleteThought) {
                 res.status(404).json({message: 'No thought found with this ID'});
                 return;
             }
+
             res.json(deleteThought);
         }catch(err){
             res.status(500).json(err);
@@ -82,25 +86,34 @@ const thoughtControllers = {
     // UPDATE with ID
     async updateReaction(req, res) {
         try{
-            const updateReaction = await Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$push: {reactions: req.body}}, {new: true, runValidators: true})
-            .populate({path: 'reactions', select: '__v'})
-            .select('__v');
+            const updateReaction = await Thoughts.findOneAndUpdate(
+                {_id: req.params.thoughtId},
+                {$addToSet : {reactions: req.body}},
+                {runValidators: true, new: true});
+
             if(!updateReaction) {
                 res.status(404).json({message: 'No thoughts found with this ID'});
                 return;
             }
+
             res.json(updateReaction);
         }catch(err){
             res.status(500).json(err);
         }
     },
     // DELETE with ID
-    async deleteReaction(req, res) {        try{
-            const deleteReaction = await         Thoughts.findOneAndUpdate({_id: params.thoughtId}, {$pull: {reactions: {reactionId: params.reactionId}}}, {new : true});
+    async deleteReaction(req, res) {        
+        try{
+            const deleteReaction = await Thoughts.findOneAndUpdate(
+                {_id: params.thoughtId}, 
+                {$pull: {reactions: {reactionId: params.reactionId}}}, 
+                {new : true});
+
             if(!deleteReaction) {
                 res.status(404).json({message: 'No thoughts found with this ID'});
                 return;
             }
+            
             res.json(deleteReaction);
         }catch(err){
             res.status(500).json(err);
